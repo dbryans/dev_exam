@@ -13,12 +13,7 @@ public class NotificationConsumer {
     @RabbitListener(queues = RabbitConfig.QUEUE_NOTIFICATION)
    
     public void handle(PaymentStatusChangedEvent event) {
+        System.out.println("Registrando auditoría: " + event);
 
-        System.out.println(
-            "Notification received: "
-            + event.getPaymentId()
-            + " with status: "
-            + event.getStatus()
-        );
-    }
+        }
 }

@@ -27,7 +27,7 @@ public class PaymentEventPublisher {
                         .paymentId(payment.getId())
                         .status(payment.getStatus())
                         .totalAmount(payment.getTotalAmount())
-                        .timestamp(LocalDateTime.now())
+                        
                         .build();
 
         rabbitTemplate.convertAndSend(
