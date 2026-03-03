@@ -1,0 +1,56 @@
+
+services:
+  # MySQL
+  mysql:
+    image: mysql:8.2
+    container_name: demo_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: demopass1234
+      MYSQL_DATABASE: exam_db
+      MYSQL_USER: generic_user
+      MYSQL_PASSWORD: generic_pass_db
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    
+    
+
+  # RabbitMQ 
+  rabbitmq:
+    image: rabbitmq:3.12-management
+    container_name: payment-rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: generic_user
+      RABBITMQ_DEFAULT_PASS: generic_pass_rabbit
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    
+
+#Spring Boot Application
+  demo-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: demo-service
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/exam_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: generic_user
+      SPRING_DATASOURCE_PASSWORD: generic_pass_db
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: generic_user
+      SPRING_RABBITMQ_PASSWORD: generic_pass_rabbit
+   
+    
+volumes:
+  mysql_data:
+  rabbitmq_data:
+
+networks:
+  payment-net:
+    driver: bridge
