@@ -10,7 +10,7 @@ import com.demo.payment.PaymentStatusChangedEvent;
 @Component
 public class AuditConsumer {
 
-    @RabbitListener(queues = RabbitConfig.QUEUE_AUDIT)
+    @RabbitListener(queues = RabbitConfig.QUEUE_CHECK)
     public void handle(PaymentStatusChangedEvent event) {
         System.out.println("Audit registered for payment: " + event.getPaymentId() + " with status: " + event.getStatus());
     }

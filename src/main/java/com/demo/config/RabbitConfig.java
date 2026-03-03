@@ -14,7 +14,7 @@ public class RabbitConfig {
     public static final String EXCHANGE = "payment.exchange";
     public static final String ROUTING_KEY = "payment.status.changed";
     public static final String QUEUE_NOTIFICATION = "payment.notification.queue";
-    public static final String QUEUE_AUDIT = "payment.audit.queue";
+    public static final String QUEUE_CHECK = "payment.check.queue";
 
     @Bean
     public TopicExchange exchange() {
@@ -28,7 +28,7 @@ public class RabbitConfig {
 
     @Bean
     public Queue auditQueue() {
-        return new Queue(QUEUE_AUDIT);
+        return new Queue(QUEUE_CHECK);
     }
 
     @Bean
