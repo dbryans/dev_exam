@@ -38,7 +38,7 @@ public class Payment {
     private String payer;           
 
     @Column(name = "receiver")
-    private String receiver;           // a quién se le paga
+    private String receiver;        
 
     @Column(name = "total_amount")
     private BigDecimal totalAmount;

@@ -10,7 +10,7 @@ import com.demo.enums.PaymentStatus;
 @Getter 
 @Setter
 @NoArgsConstructor
- @AllArgsConstructor
+@AllArgsConstructor
 @Builder
 public class PaymentResponse {
 
