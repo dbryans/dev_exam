@@ -18,11 +18,11 @@ WORKDIR /app
 
 RUN useradd -m spring
 
-COPY --from=builder /app/target/dev-exam-1.0.1-SNAPSHOT.jar app.jar
+COPY --from=builder /app/target/dev-exam-0.0.1-SNAPSHOT.jar app.jar
 
 RUN chown spring:spring app.jar
 
-#USER spring
+USER spring
 
 EXPOSE 8080
 
