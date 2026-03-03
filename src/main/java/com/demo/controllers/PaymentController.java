@@ -33,6 +33,7 @@ public class PaymentController {
     public ResponseEntity<Payment> changeStatus(
             @PathVariable Long id,
             @RequestParam PaymentStatus status) {
+                System.out.println("Current status of payment " + id + ": " + status);
         return ResponseEntity.ok(service.changeStatus(id, status));
     }
 }

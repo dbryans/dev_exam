@@ -41,21 +41,15 @@ public class PaymentService {
     }
 
     @Transactional
-    public Payment changeStatus(long id, PaymentStatus status) {
+    public Payment changeStatus(long id, PaymentStatus newStatus) {
         Payment payment = get(id);
-        System.out.println("Current status of payment " + id + ": " + payment.getStatus());
-
-        if (payment.getStatus() != status) {
-            payment.setStatus(status);
-            payment.setUpdateDate(LocalDateTime.now());
-            repository.save(payment);
-
-                    System.out.println("Publishing event for payment: " + payment.getId() + " with status: " + payment.getStatus());
-
-            publisher.publish(payment);
-        }else {
-            throw new RuntimeException("Payment already has the status: " + status);
+       if (payment.getStatus() == newStatus) {
+            return payment; 
         }
-        return payment;
+         payment.setStatus(newStatus);
+        payment.setUpdateDate(LocalDateTime.now());
+        Payment updated = repository.save(payment);
+        publisher.publish(updated);
+        return updated;
     }
 }

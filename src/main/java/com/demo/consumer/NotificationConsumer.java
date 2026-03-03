@@ -11,10 +11,14 @@ import com.demo.payment.PaymentStatusChangedEvent;
 public class NotificationConsumer {
 
     @RabbitListener(queues = RabbitConfig.QUEUE_NOTIFICATION)
+   
     public void handle(PaymentStatusChangedEvent event) {
-        
-         System.out.println("Notification received: {} -> {}"+
-            event.getPaymentId()+" with status: "+
-            event.getStatus());
+
+        System.out.println(
+            "Notification received: "
+            + event.getPaymentId()
+            + " with status: "
+            + event.getStatus()
+        );
     }
 }
